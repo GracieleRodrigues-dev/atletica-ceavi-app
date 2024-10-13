@@ -1,4 +1,4 @@
-package com.example.atletica_ceavi_app.pages
+package com.example.atletica_ceavi_app.view
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
@@ -30,8 +30,8 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.atletica_ceavi_app.AuthState
-import com.example.atletica_ceavi_app.AuthViewModel
+import com.example.atletica_ceavi_app.viewModel.AuthState
+import com.example.atletica_ceavi_app.viewModel.AuthViewModel
 import com.example.atletica_ceavi_app.R
 
 @Composable

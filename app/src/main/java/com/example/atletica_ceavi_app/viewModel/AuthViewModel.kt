@@ -1,4 +1,4 @@
-package com.example.atletica_ceavi_app
+package com.example.atletica_ceavi_app.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -34,7 +34,8 @@ class AuthViewModel : ViewModel(){
                 if (task.isSuccessful){
                     _authState.value = AuthState.Authenticated
                 }else{
-                    _authState.value = AuthState.Error(task.exception?.message?:"Erro ao realizar login")
+                    _authState.value =
+                        AuthState.Error(task.exception?.message ?: "Erro ao realizar login")
                 }
             }
     }
@@ -50,7 +51,8 @@ class AuthViewModel : ViewModel(){
                 if (task.isSuccessful){
                     _authState.value = AuthState.Authenticated
                 }else{
-                    _authState.value = AuthState.Error(task.exception?.message?:"Erro ao realizar login")
+                    _authState.value =
+                        AuthState.Error(task.exception?.message ?: "Erro ao realizar login")
                 }
             }
     }

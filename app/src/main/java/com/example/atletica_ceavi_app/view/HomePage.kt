@@ -1,4 +1,4 @@
-package com.example.atletica_ceavi_app.pages
+package com.example.atletica_ceavi_app.view
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,11 +11,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.atletica_ceavi_app.AuthState
-import com.example.atletica_ceavi_app.AuthViewModel
+import com.example.atletica_ceavi_app.viewModel.AuthState
+import com.example.atletica_ceavi_app.viewModel.AuthViewModel
+import com.google.firebase.Firebase
+import com.google.firebase.database.database
 
 @Composable
 fun HomePage(modifier: Modifier = Modifier, navController: NavController, authViewModel: AuthViewModel){
+    val database = Firebase.database
+    val myRef = database.getReference("message")
+
+    myRef.setValue("Hello, World!")
+
     val authState = authViewModel.authState.observeAsState()
 
     LaunchedEffect(authState.value) {
@@ -28,7 +35,10 @@ fun HomePage(modifier: Modifier = Modifier, navController: NavController, authVi
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
-    ) { Text(text = "Home Page", fontSize = 32.sp)
+    ) { Text(
+        text = "Home Page",
+        fontSize = 32.sp
+    )
         TextButton(onClick = {
             authViewModel.signout()
         }) {

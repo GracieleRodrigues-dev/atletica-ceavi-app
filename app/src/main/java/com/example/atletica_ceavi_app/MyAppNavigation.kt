@@ -5,8 +5,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.atletica_ceavi_app.pages.HomePage
-import com.example.atletica_ceavi_app.pages.LoginPage
+import com.example.atletica_ceavi_app.view.HomePage
+import com.example.atletica_ceavi_app.view.LoginPage
+import com.example.atletica_ceavi_app.viewModel.AuthViewModel
 
 @Composable
 fun MyAppNavigation(modifier: Modifier = Modifier,authViewModel: AuthViewModel){
