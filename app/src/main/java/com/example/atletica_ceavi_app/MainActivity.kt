@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import com.example.atletica_ceavi_app.ui.components.navigation.MyAppNavigation
 import com.example.atletica_ceavi_app.ui.theme.AtleticaceaviappTheme
 import com.example.atletica_ceavi_app.viewModel.AuthViewModel
 

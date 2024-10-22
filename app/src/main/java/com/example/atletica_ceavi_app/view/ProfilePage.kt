@@ -6,7 +6,7 @@ import com.example.atletica_ceavi_app.ui.components.navigation.DrawerLayout
 import com.example.atletica_ceavi_app.viewModel.AuthViewModel
 
 @Composable
-fun HomePage(
+fun ProfilePage(
     navController: NavController,
     authViewModel: AuthViewModel
 ) {
