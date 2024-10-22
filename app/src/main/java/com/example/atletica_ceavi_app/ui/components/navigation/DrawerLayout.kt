@@ -25,6 +25,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -42,7 +43,7 @@ fun DrawerLayout(navController: NavController,authViewModel: AuthViewModel,  mod
     val currentRoute = navController.currentDestination?.route ?: "Home"
     val screenName = menuItems.find { it.destination == currentRoute }?.title ?: "Screen Name"
 
-    val authState = authViewModel.authState.observeAsState()
+    val authState = authViewModel.authState.collectAsState()
 
     LaunchedEffect(authState.value) {
         when (authState.value) {

@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.atletica_ceavi_app.HomePage
 import com.example.atletica_ceavi_app.NotificationsPage
 import com.example.atletica_ceavi_app.ProfilePage
+import com.example.atletica_ceavi_app.UserRegistrationPage
 import com.example.atletica_ceavi_app.view.LoginPage
 import com.example.atletica_ceavi_app.viewModel.AuthViewModel
 
@@ -27,6 +28,9 @@ fun MyAppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel)
         }
         composable("notifications") {
             NotificationsPage(navController,authViewModel)
+        }
+        composable("users") {
+            UserRegistrationPage(navController,authViewModel, onUserRegistered = {})
         }
     }
 }

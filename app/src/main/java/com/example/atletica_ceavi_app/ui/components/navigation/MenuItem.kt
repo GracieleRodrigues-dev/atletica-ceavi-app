@@ -13,4 +13,5 @@ val menuItems = listOf(
     MenuItem("Home", "home", Icons.Filled.Home),
     MenuItem("Perfil", "profile", Icons.Filled.AccountCircle),
     MenuItem("Notificações", "notifications", Icons.Filled.Notifications) ,
+    MenuItem("Usuários", "users", Icons.Filled.Notifications)
 )
