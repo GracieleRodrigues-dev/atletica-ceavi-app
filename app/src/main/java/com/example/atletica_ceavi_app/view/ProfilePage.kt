@@ -1,4 +1,4 @@
-package com.example.atletica_ceavi_app
+package com.example.atletica_ceavi_app.view
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
@@ -10,5 +10,7 @@ fun ProfilePage(
     navController: NavController,
     authViewModel: AuthViewModel
 ) {
-    DrawerLayout(navController,authViewModel)
+    DrawerLayout(navController, authViewModel) {
+
+    }
 }

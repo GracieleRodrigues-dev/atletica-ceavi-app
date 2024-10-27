@@ -44,14 +44,19 @@ class AuthViewModel : ViewModel() {
             }
     }
 
-
-    fun signup(email: String, password: String) {
-        if (email.isEmpty() || password.isEmpty()) {
-            _authState.value = AuthState.Error("E-mail ou senha não podem estar vazios")
+    fun signup(
+        email: String,
+        password: String,
+        name: String,
+        birthDate: String,
+        gender: String,
+        role: String,
+        onResult: (Boolean, String?) -> Unit
+    ) {
+        if (email.isEmpty() || password.isEmpty() || name.isEmpty() || birthDate.isEmpty()) {
+            onResult(false, "Todos os campos são obrigatórios")
             return
         }
-
-        _authState.value = AuthState.Loading
 
         viewModelScope.launch {
             auth.createUserWithEmailAndPassword(email, password)
@@ -60,15 +65,15 @@ class AuthViewModel : ViewModel() {
                         val user = auth.currentUser
                         if (user != null) {
                             userRepository.registerUserInDatabase(
-                                name = user.displayName ?: "",
-                                role = "role",
-                                age = 25,
-                                gender = "Masculino"
+                                name = name,
+                                role = role,
+                                birthDate = birthDate,
+                                gender = gender
                             )
-                            _authState.value = AuthState.Authenticated
+                            onResult(true, null)
                         }
                     } else {
-                        _authState.value = AuthState.Error(task.exception?.message ?: "Erro ao criar usuário")
+                        onResult(false, task.exception?.message ?: "Erro ao criar usuário")
                     }
                 }
         }

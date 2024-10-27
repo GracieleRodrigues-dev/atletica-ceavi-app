@@ -5,15 +5,17 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.atletica_ceavi_app.HomePage
-import com.example.atletica_ceavi_app.NotificationsPage
-import com.example.atletica_ceavi_app.ProfilePage
-import com.example.atletica_ceavi_app.UserRegistrationPage
+import com.example.atletica_ceavi_app.view.HomePage
 import com.example.atletica_ceavi_app.view.LoginPage
+import com.example.atletica_ceavi_app.view.NotificationsPage
+import com.example.atletica_ceavi_app.view.ProfilePage
+import com.example.atletica_ceavi_app.view.UserRegistrationPage
+import com.example.atletica_ceavi_app.view.UsersListPage
 import com.example.atletica_ceavi_app.viewModel.AuthViewModel
+import com.example.atletica_ceavi_app.viewModel.UserViewModel
 
 @Composable
-fun MyAppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel) {
+fun MyAppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel, userViewModel: UserViewModel ) {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "login") {
@@ -30,7 +32,10 @@ fun MyAppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel)
             NotificationsPage(navController,authViewModel)
         }
         composable("users") {
-            UserRegistrationPage(navController,authViewModel, onUserRegistered = {})
+            UsersListPage(navController,authViewModel,userViewModel)
+        }
+        composable("userRegistration") {
+            UserRegistrationPage(navController,authViewModel)
         }
     }
 }
