@@ -1,7 +1,9 @@
 package com.example.atletica_ceavi_app.ui.components.navigation
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -25,8 +27,12 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,13 +42,20 @@ import com.example.atletica_ceavi_app.viewModel.AuthViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun DrawerLayout(navController: NavController,authViewModel: AuthViewModel,  modifier: Modifier = Modifier){
+fun DrawerLayout(
+    navController: NavController,
+    authViewModel: AuthViewModel,
+    modifier: Modifier = Modifier ,
+    content: @Composable () -> Unit
+){
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val currentRoute = navController.currentDestination?.route ?: "Home"
-    val screenName = menuItems.find { it.destination == currentRoute }?.title ?: "Screen Name"
+    val screenName = menuItems.flatMap { item ->
+        listOf(item) + (item.subItems ?: emptyList())
+    }.find { it.destination == currentRoute }?.title ?: "Screen Name"
 
-    val authState = authViewModel.authState.observeAsState()
+    val authState = authViewModel.authState.collectAsState()
 
     LaunchedEffect(authState.value) {
         when (authState.value) {
@@ -72,13 +85,19 @@ fun DrawerLayout(navController: NavController,authViewModel: AuthViewModel,  mod
                 )
             }
         ) { padding ->
-            ScreenContent(modifier = Modifier.padding(padding))
+            Column(
+                modifier = Modifier
+                    .padding(padding)
+                    .fillMaxSize()
+            ) {
+                content()
+            }
         }
     }
 }
 
 @Composable
-fun DrawerContent(navController: NavController, authViewModel: AuthViewModel,modifier: Modifier = Modifier) {
+fun DrawerContent(navController: NavController, authViewModel: AuthViewModel, modifier: Modifier = Modifier) {
     Text(
         text = "Atlética CEAVI",
         fontSize = 24.sp,
@@ -89,6 +108,8 @@ fun DrawerContent(navController: NavController, authViewModel: AuthViewModel,mod
     Spacer(modifier = Modifier.height(4.dp))
 
     menuItems.forEach { item ->
+        var expanded by remember { mutableStateOf(false) }
+
         NavigationDrawerItem(
             icon = {
                 Icon(
@@ -105,10 +126,39 @@ fun DrawerContent(navController: NavController, authViewModel: AuthViewModel,mod
             },
             selected = false,
             onClick = {
-                navController.navigate(item.destination)
+                if (item.subItems != null) {
+                    expanded = !expanded
+                } else {
+                    navController.navigate(item.destination)
+                }
             }
         )
         Spacer(modifier = Modifier.height(4.dp))
+
+        if (expanded && item.subItems != null) {
+            item.subItems.forEach { subItem ->
+                NavigationDrawerItem(
+                    icon = {
+                        Icon(
+                            imageVector = subItem.icon,
+                            contentDescription = subItem.title
+                        )
+                    },
+                    label = {
+                        Text(
+                            text = subItem.title,
+                            fontSize = 15.sp,
+                            modifier = Modifier.padding(start = 32.dp)
+                        )
+                    },
+                    selected = false,
+                    onClick = {
+                        navController.navigate(subItem.destination)
+                    }
+                )
+                Spacer(modifier = Modifier.height(2.dp))
+            }
+        }
     }
 
     NavigationDrawerItem(
@@ -131,6 +181,7 @@ fun DrawerContent(navController: NavController, authViewModel: AuthViewModel,mod
         }
     )
 }
+
 
 @Composable
 fun ScreenContent(modifier: Modifier = Modifier){

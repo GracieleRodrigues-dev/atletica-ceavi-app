@@ -12,18 +12,21 @@ import androidx.compose.ui.Modifier
 import com.example.atletica_ceavi_app.ui.components.navigation.MyAppNavigation
 import com.example.atletica_ceavi_app.ui.theme.AtleticaceaviappTheme
 import com.example.atletica_ceavi_app.viewModel.AuthViewModel
+import com.example.atletica_ceavi_app.viewModel.UserViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         val AuthViewModel: AuthViewModel by viewModels()
+        val UserViewModel: UserViewModel by viewModels()
         setContent {
             AtleticaceaviappTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     MyAppNavigation(
                         modifier = Modifier.padding(innerPadding),
-                        authViewModel = AuthViewModel
+                        authViewModel = AuthViewModel,
+                        userViewModel = UserViewModel
                     )
                 }
             }
