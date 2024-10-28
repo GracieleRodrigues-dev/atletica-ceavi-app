@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class TeamViewModel : ViewModel() {
-    private val repository = TeamRepository()
+    private val teamRepository = TeamRepository()
 
     private val userRepository = UserRepository()
     private val sportRepository = SportRepository()
@@ -77,7 +77,7 @@ class TeamViewModel : ViewModel() {
     fun createTeam(name: String, sport: Sport?, coach: UserData?, members: List<UserData>) {
         if (sport != null && coach != null) {
             val newTeam = Team(id = null, name = name, sport = sport, coach = coach, members = members)
-            repository.addTeam(newTeam) { success ->
+            teamRepository.addTeam(newTeam) { success ->
                 if (success) getAllTeams()
             }
         }
@@ -85,7 +85,7 @@ class TeamViewModel : ViewModel() {
 
     private fun getAllTeams() {
         viewModelScope.launch {
-            repository.getAllTeams { teamList ->
+            teamRepository.getAllTeams { teamList ->
                 _teams.value = teamList
             }
         }

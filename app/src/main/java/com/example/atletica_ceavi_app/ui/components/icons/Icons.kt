@@ -164,3 +164,76 @@ public val People: ImageVector
 
 private var _People: ImageVector? = null
 
+
+public val Alarm_on: ImageVector
+    get() {
+        if (_Alarm_on != null) {
+            return _Alarm_on!!
+        }
+        _Alarm_on = ImageVector.Builder(
+            name = "Alarm_on",
+            defaultWidth = 24.dp,
+            defaultHeight = 24.dp,
+            viewportWidth = 960f,
+            viewportHeight = 960f
+        ).apply {
+            path(
+                fill = SolidColor(Color.Black),
+                fillAlpha = 1.0f,
+                stroke = null,
+                strokeAlpha = 1.0f,
+                strokeLineWidth = 1.0f,
+                strokeLineCap = StrokeCap.Butt,
+                strokeLineJoin = StrokeJoin.Miter,
+                strokeLineMiter = 1.0f,
+                pathFillType = PathFillType.NonZero
+            ) {
+                moveTo(438f, 662f)
+                lineToRelative(226f, -226f)
+                lineToRelative(-57f, -57f)
+                lineToRelative(-169f, 169f)
+                lineToRelative(-85f, -85f)
+                lineToRelative(-57f, 57f)
+                close()
+                moveToRelative(42f, 218f)
+                quadToRelative(-75f, 0f, -140.5f, -28.5f)
+                reflectiveQuadToRelative(-114f, -77f)
+                reflectiveQuadToRelative(-77f, -114f)
+                reflectiveQuadTo(120f, 520f)
+                reflectiveQuadToRelative(28.5f, -140.5f)
+                reflectiveQuadToRelative(77f, -114f)
+                reflectiveQuadToRelative(114f, -77f)
+                reflectiveQuadTo(480f, 160f)
+                reflectiveQuadToRelative(140.5f, 28.5f)
+                reflectiveQuadToRelative(114f, 77f)
+                reflectiveQuadToRelative(77f, 114f)
+                reflectiveQuadTo(840f, 520f)
+                reflectiveQuadToRelative(-28.5f, 140.5f)
+                reflectiveQuadToRelative(-77f, 114f)
+                reflectiveQuadToRelative(-114f, 77f)
+                reflectiveQuadTo(480f, 880f)
+                moveTo(224f, 94f)
+                lineToRelative(56f, 56f)
+                lineToRelative(-170f, 170f)
+                lineToRelative(-56f, -56f)
+                close()
+                moveToRelative(512f, 0f)
+                lineToRelative(170f, 170f)
+                lineToRelative(-56f, 56f)
+                lineToRelative(-170f, -170f)
+                close()
+                moveTo(480f, 800f)
+                quadToRelative(117f, 0f, 198.5f, -81.5f)
+                reflectiveQuadTo(760f, 520f)
+                reflectiveQuadToRelative(-81.5f, -198.5f)
+                reflectiveQuadTo(480f, 240f)
+                reflectiveQuadToRelative(-198.5f, 81.5f)
+                reflectiveQuadTo(200f, 520f)
+                reflectiveQuadToRelative(81.5f, 198.5f)
+                reflectiveQuadTo(480f, 800f)
+            }
+        }.build()
+        return _Alarm_on!!
+    }
+
+private var _Alarm_on: ImageVector? = null

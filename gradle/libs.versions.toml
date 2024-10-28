@@ -8,9 +8,11 @@ espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.4"
 activityCompose = "1.9.1"
 composeBom = "2024.04.01"
+mapsCompose = "1.0.0"
 navigationCompose = "2.8.2"
 googleGmsGoogleServices = "4.4.2"
 firebaseAuth = "23.0.0"
+playServicesMaps = "18.0.2"
 runtimeLivedata = "1.7.3"
 firebaseDatabase = "21.0.0"
 
@@ -33,6 +35,8 @@ androidx-navigation-compose = { group = "androidx.navigation", name = "navigatio
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 androidx-runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "runtimeLivedata" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
+maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = "mapsCompose" }
+play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMaps" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
