@@ -7,8 +7,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.atletica_ceavi_app.view.HomePage
 import com.example.atletica_ceavi_app.view.LoginPage
+import com.example.atletica_ceavi_app.view.NewSportPage
+import com.example.atletica_ceavi_app.view.NewTeamPage
 import com.example.atletica_ceavi_app.view.NotificationsPage
 import com.example.atletica_ceavi_app.view.ProfilePage
+import com.example.atletica_ceavi_app.view.SportListPage
+import com.example.atletica_ceavi_app.view.TeamListPage
 import com.example.atletica_ceavi_app.view.UserRegistrationPage
 import com.example.atletica_ceavi_app.view.UsersListPage
 import com.example.atletica_ceavi_app.viewModel.AuthViewModel
@@ -36,6 +40,18 @@ fun MyAppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel,
         }
         composable("userRegistration") {
             UserRegistrationPage(navController,authViewModel)
+        }
+        composable("sports") {
+            SportListPage(navController,authViewModel)
+        }
+        composable("newSport") {
+            NewSportPage(navController,authViewModel)
+        }
+        composable("teams") {
+            TeamListPage(navController,authViewModel)
+        }
+        composable("newTeam") {
+            NewTeamPage(navController,authViewModel)
         }
     }
 }

@@ -11,9 +11,13 @@ import kotlinx.coroutines.launch
 class UserViewModel : ViewModel() {
     private val userRepository = UserRepository()
     private val _users = MutableStateFlow<List<UserData>>(emptyList())
+    private val _loggedUser = MutableStateFlow<UserData?>(null)
     val users: StateFlow<List<UserData>> = _users
+    val loggedUser: StateFlow<UserData?> = _loggedUser
+
 
     init {
+        getLoggedUserData()
         getAllUsers()
     }
 
@@ -27,5 +31,11 @@ class UserViewModel : ViewModel() {
 
     fun refreshUsers() {
         getAllUsers()
+    }
+
+    private fun getLoggedUserData() {
+        userRepository.getLoggedUserData { userData ->
+            _loggedUser.value = userData
+        }
     }
 }

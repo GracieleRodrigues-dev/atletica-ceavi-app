@@ -7,6 +7,8 @@ import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.example.atletica_ceavi_app.ui.components.icons.People
+import com.example.atletica_ceavi_app.ui.components.icons.Sports_baseball
 
 data class MenuItem(
     val title: String,
@@ -27,5 +29,19 @@ val menuItems = listOf(
             MenuItem("Lista de Usuários", "users", Icons.Filled.Face),
             MenuItem("Adicionar Usuário", "userRegistration", Icons.Filled.AddCircle)
         )
-    )
+    ),
+    MenuItem("Modalidades",
+        "",
+        Sports_baseball,
+        subItems = listOf(
+            MenuItem("Lista de Modalidades", "sports", Sports_baseball),
+            MenuItem("Adicionar Modalidade", "newSport", Icons.Filled.AddCircle)
+        )),
+    MenuItem("Equipes",
+        "",
+        People,
+        subItems = listOf(
+            MenuItem("Lista de Equipes", "teams", People),
+            MenuItem("Adicionar Equipe", "newTeam", Icons.Filled.AddCircle)
+        )),
 )

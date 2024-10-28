@@ -9,4 +9,8 @@ data class UserData(
     val gender: String?
 ) {
     constructor() : this(null, null, null, null, null, null)
+
+    override fun toString(): String {
+        return name ?: "Nome não disponível"
+    }
 }

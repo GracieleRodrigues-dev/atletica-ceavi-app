@@ -65,6 +65,7 @@ class AuthViewModel : ViewModel() {
                         val user = auth.currentUser
                         if (user != null) {
                             userRepository.registerUserInDatabase(
+                                userId = user.uid,
                                 name = name,
                                 role = role,
                                 birthDate = birthDate,
@@ -78,6 +79,7 @@ class AuthViewModel : ViewModel() {
                 }
         }
     }
+
 
     fun signout(){
         auth.signOut()
