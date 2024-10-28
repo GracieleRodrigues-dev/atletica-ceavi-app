@@ -9,6 +9,7 @@ import com.example.atletica_ceavi_app.view.HomePage
 import com.example.atletica_ceavi_app.view.LoginPage
 import com.example.atletica_ceavi_app.view.NewSportPage
 import com.example.atletica_ceavi_app.view.NewTeamPage
+import com.example.atletica_ceavi_app.view.NewTrainingPage
 import com.example.atletica_ceavi_app.view.NotificationsPage
 import com.example.atletica_ceavi_app.view.ProfilePage
 import com.example.atletica_ceavi_app.view.SportListPage
@@ -52,6 +53,9 @@ fun MyAppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel,
         }
         composable("newTeam") {
             NewTeamPage(navController,authViewModel)
+        }
+        composable("newTraining") {
+            NewTrainingPage(navController,authViewModel)
         }
     }
 }

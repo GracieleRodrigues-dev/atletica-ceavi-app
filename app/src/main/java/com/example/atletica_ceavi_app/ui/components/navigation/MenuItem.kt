@@ -5,8 +5,10 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.example.atletica_ceavi_app.ui.components.icons.Alarm_on
 import com.example.atletica_ceavi_app.ui.components.icons.People
 import com.example.atletica_ceavi_app.ui.components.icons.Sports_baseball
 
@@ -44,4 +46,6 @@ val menuItems = listOf(
             MenuItem("Lista de Equipes", "teams", People),
             MenuItem("Adicionar Equipe", "newTeam", Icons.Filled.AddCircle)
         )),
+
+    MenuItem("Adicionar Treino", "newTraining", Alarm_on) ,
 )
