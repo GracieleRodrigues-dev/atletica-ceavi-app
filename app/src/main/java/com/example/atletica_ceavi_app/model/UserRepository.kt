@@ -14,26 +14,29 @@ class UserRepository {
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val database: DatabaseReference = FirebaseDatabase.getInstance().getReference("users")
 
-    fun registerUserInDatabase(name: String, role: String, birthDate: String, gender: String) {
-        val user = auth.currentUser
-        if (user != null) {
-            val userData = UserData(
-                id = user.uid,
-                name = name,
-                role = role,
-                registrationDate =  LocalDate.now().toString(),
-                birthDate = birthDate.toString(),
-                gender = gender
-            )
+    fun registerUserInDatabase(
+        userId: String,
+        name: String,
+        role: String,
+        birthDate: String,
+        gender: String
+    ) {
+        val userData = UserData(
+            id = userId,
+            name = name,
+            role = role,
+            registrationDate = LocalDate.now().toString(),
+            birthDate = birthDate,
+            gender = gender
+        )
 
-            database.child(user.uid).setValue(userData)
-                .addOnSuccessListener {
-                    Log.d("UserRepository", "Usuário registrado com sucesso: $userData")
-                }
-                .addOnFailureListener { exception ->
-                    Log.e("UserRepository", "Erro ao registrar usuário: ${exception.message}")
-                }
-        }
+        database.child(userId).setValue(userData)
+            .addOnSuccessListener {
+                Log.d("UserRepository", "Usuário registrado com sucesso: $userData")
+            }
+            .addOnFailureListener { exception ->
+                Log.e("UserRepository", "Erro ao registrar usuário: ${exception.message}")
+            }
     }
 
     fun getLoggedUserData(onUserDataReceived: (UserData?) -> Unit) {

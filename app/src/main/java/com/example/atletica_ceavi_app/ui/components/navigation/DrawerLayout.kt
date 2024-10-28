@@ -141,7 +141,8 @@ fun DrawerContent(navController: NavController, authViewModel: AuthViewModel, mo
                     icon = {
                         Icon(
                             imageVector = subItem.icon,
-                            contentDescription = subItem.title
+                            contentDescription = subItem.title,
+                            modifier = Modifier.padding(start = 15.dp)
                         )
                     },
                     label = {
