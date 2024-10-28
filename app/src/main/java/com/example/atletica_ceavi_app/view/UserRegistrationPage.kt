@@ -1,21 +1,17 @@
 package com.example.atletica_ceavi_app.view
 
-import android.app.DatePickerDialog
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.atletica_ceavi_app.ui.components.datePicker.DatePickerComponent
 import com.example.atletica_ceavi_app.ui.components.navigation.DrawerLayout
 import com.example.atletica_ceavi_app.viewModel.AuthViewModel
 import java.time.LocalDate
-import java.util.*
 
 @Composable
 fun UserRegistrationPage(
@@ -28,12 +24,14 @@ fun UserRegistrationPage(
     var birthDate by remember { mutableStateOf("") }
     var selectedGender by remember { mutableStateOf("Masculino") }
     var selectedRole by remember { mutableStateOf("Atleta") }
-    var showDatePicker by remember { mutableStateOf(false) }
     var showSnackbar by remember { mutableStateOf(false) }
     var feedbackMessage by remember { mutableStateOf("") }
 
     val genders = listOf("Masculino", "Feminino", "Outro")
     val roles = listOf("Administrador", "Treinador", "Atleta")
+
+    val minDate = LocalDate.now().minusYears(100)
+    val maxDate = LocalDate.now()
 
     DrawerLayout(navController, authViewModel) {
         Column(
@@ -65,17 +63,11 @@ fun UserRegistrationPage(
                 visualTransformation = PasswordVisualTransformation()
             )
 
-            OutlinedTextField(
-                value = birthDate,
-                onValueChange = {},
-                label = { Text("Data de Nascimento") },
-                modifier = Modifier.fillMaxWidth(),
-                readOnly = true,
-                trailingIcon = {
-                    IconButton(onClick = { showDatePicker = true }) {
-                        Icon(imageVector = Icons.Default.DateRange, contentDescription = "Selecionar Data")
-                    }
-                }
+            DatePickerComponent(
+                selectedDate = birthDate,
+                onDateSelected = { birthDate = it },
+                minDate = minDate,
+                maxDate = maxDate
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -108,11 +100,11 @@ fun UserRegistrationPage(
                         gender = selectedGender,
                         role = selectedRole
                     ) { success, message ->
-                        if (success) {
-                            feedbackMessage = "Cadastro realizado com sucesso!"
+                        feedbackMessage = if (success) {
                             navController.navigate("users")
+                            "Cadastro realizado com sucesso!"
                         } else {
-                            feedbackMessage = message ?: "Erro desconhecido."
+                            message ?: "Erro desconhecido."
                         }
                         showSnackbar = true
                     }
@@ -123,7 +115,6 @@ fun UserRegistrationPage(
             }, modifier = Modifier.align(Alignment.End)) {
                 Text("Cadastrar")
             }
-
 
             if (showSnackbar) {
                 Snackbar(
@@ -137,24 +128,9 @@ fun UserRegistrationPage(
                 }
             }
         }
-
-        if (showDatePicker) {
-            val context = LocalContext.current
-            val calendar = Calendar.getInstance()
-            val datePickerDialog = DatePickerDialog(
-                context,
-                { _, year, month, dayOfMonth ->
-                    birthDate = LocalDate.of(year, month + 1, dayOfMonth).toString()
-                    showDatePicker = false
-                },
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
-            )
-            datePickerDialog.show()
-        }
     }
 }
+
 
 
 @OptIn(ExperimentalMaterial3Api::class)
