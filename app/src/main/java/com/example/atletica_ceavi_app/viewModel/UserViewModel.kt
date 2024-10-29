@@ -15,7 +15,6 @@ class UserViewModel : ViewModel() {
     val users: StateFlow<List<UserData>> = _users
     val loggedUser: StateFlow<UserData?> = _loggedUser
 
-
     init {
         getLoggedUserData()
         getAllUsers()

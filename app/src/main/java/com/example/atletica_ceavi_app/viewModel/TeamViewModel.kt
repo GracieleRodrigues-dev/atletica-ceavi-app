@@ -1,5 +1,7 @@
 package com.example.atletica_ceavi_app.viewModel
 
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.atletica_ceavi_app.model.Sport
@@ -17,6 +19,8 @@ class TeamViewModel : ViewModel() {
 
     private val userRepository = UserRepository()
     private val sportRepository = SportRepository()
+    private val _isTeamAdded = mutableStateOf(false)
+    val isTeamAdded: State<Boolean> = _isTeamAdded
 
 
     private val _teams = MutableStateFlow<List<Team>>(emptyList())
@@ -78,7 +82,10 @@ class TeamViewModel : ViewModel() {
         if (sport != null && coach != null) {
             val newTeam = Team(id = null, name = name, sport = sport, coach = coach, members = members)
             teamRepository.addTeam(newTeam) { success ->
-                if (success) getAllTeams()
+                if (success) {
+                    _isTeamAdded.value = true;
+                    refreshTeams()
+                }
             }
         }
     }
@@ -93,5 +100,8 @@ class TeamViewModel : ViewModel() {
 
     fun refreshTeams() {
         getAllTeams()
+    }
+    fun resetTeamAdded() {
+        _isTeamAdded.value = false
     }
 }
