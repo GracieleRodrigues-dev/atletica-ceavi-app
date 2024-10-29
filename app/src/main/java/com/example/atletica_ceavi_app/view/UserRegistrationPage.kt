@@ -67,7 +67,8 @@ fun UserRegistrationPage(
                 selectedDate = birthDate,
                 onDateSelected = { birthDate = it },
                 minDate = minDate,
-                maxDate = maxDate
+                maxDate = maxDate,
+                labelText = "Data de Nascimento"
             )
 
             Spacer(modifier = Modifier.height(16.dp))

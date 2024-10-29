@@ -5,16 +5,13 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.platform.LocalContext
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.*
 import java.util.Locale
@@ -26,29 +23,34 @@ fun MapComponent(
     onMapClick: (LatLng, String) -> Unit
 ) {
     val context = LocalContext.current
-    var hasLocationPermission by remember { mutableStateOf(
-        ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-    ) }
+    var hasLocationPermission by remember { mutableStateOf(false) }
 
     val requestPermissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission(),
-        onResult = { isGranted -> hasLocationPermission = isGranted }
+        onResult = { isGranted ->
+            hasLocationPermission = isGranted
+        }
     )
 
     LaunchedEffect(Unit) {
-        if (!hasLocationPermission) {
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+        } else {
+            hasLocationPermission = true
         }
     }
 
     val mapProperties = MapProperties(isMyLocationEnabled = true)
     val mapUiSettings = MapUiSettings(myLocationButtonEnabled = true)
+    val cameraPositionState = rememberCameraPositionState {
+        position = CameraPosition.fromLatLngZoom(mapPosition, 15f)
+    }
 
     if (hasLocationPermission) {
         GoogleMap(
-            modifier = Modifier.fillMaxWidth().height(200.dp),
             properties = mapProperties,
             uiSettings = mapUiSettings,
+            cameraPositionState = cameraPositionState,
             onMapClick = { latLng ->
                 val address = getAddressFromLatLng(context, latLng)
                 onMapClick(latLng, address)
@@ -60,7 +62,6 @@ fun MapComponent(
         Text(text = "Permissão de localização necessária para exibir o mapa.")
     }
 }
-
 
 private fun getAddressFromLatLng(context: Context, latLng: LatLng): String {
     val geocoder = Geocoder(context, Locale.getDefault())

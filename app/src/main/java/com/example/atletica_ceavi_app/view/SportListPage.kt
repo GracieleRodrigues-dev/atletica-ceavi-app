@@ -3,6 +3,8 @@ package com.example.atletica_ceavi_app.view
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
@@ -28,11 +30,16 @@ fun SportListPage(
 ) {
     val sportViewModel: SportViewModel = viewModel()
     sportViewModel.refreshSports()
+    val scrollState = rememberScrollState()
 
     DrawerLayout(navController, authViewModel) {
         val sports by sportViewModel.sports.collectAsState()
 
-        Column(modifier = Modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(scrollState)
+        ) {
             Spacer(modifier = Modifier.height(16.dp))
 
             if (sports.isEmpty()) {
@@ -51,12 +58,11 @@ fun SportListPage(
                 }
             }
 
-            Column(
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(4.dp),
-                horizontalAlignment = Alignment.End
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 FloatingActionButton(
                     onClick = {

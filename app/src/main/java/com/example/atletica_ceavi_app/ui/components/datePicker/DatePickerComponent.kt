@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import java.time.LocalDate
 import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 @Composable
@@ -18,14 +19,15 @@ fun DatePickerComponent(
     selectedDate: String,
     onDateSelected: (String) -> Unit,
     minDate: LocalDate? = null,
-    maxDate: LocalDate? = null
+    maxDate: LocalDate? = null,
+    labelText: String = "Data"
 ) {
     var showDatePicker by remember { mutableStateOf(false) }
 
     OutlinedTextField(
         value = selectedDate,
         onValueChange = {},
-        label = { Text("Data de Nascimento") },
+        label = { Text(labelText) },
         modifier = Modifier.fillMaxWidth(),
         readOnly = true,
         trailingIcon = {
@@ -49,8 +51,9 @@ fun DatePickerComponent(
         val datePickerDialog = DatePickerDialog(
             context,
             { _, year, month, dayOfMonth ->
-                val date = LocalDate.of(year, month + 1, dayOfMonth).toString()
-                onDateSelected(date)
+                val date = LocalDate.of(year, month + 1, dayOfMonth)
+                val formattedDate = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                onDateSelected(formattedDate)
                 showDatePicker = false
             },
             calendar.get(Calendar.YEAR),

@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Refresh
@@ -37,10 +39,15 @@ fun UsersListPage(
     userViewModel: UserViewModel
 ) {
     userViewModel.refreshUsers()
+    val scrollState = rememberScrollState()
     DrawerLayout(navController, authViewModel) {
         val users by userViewModel.users.collectAsState()
 
-        Column(modifier = Modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(scrollState)
+        ) {
             Spacer(modifier = Modifier.height(16.dp))
 
             if (users.isEmpty()) {
@@ -57,12 +64,11 @@ fun UsersListPage(
                 }
             }
 
-            Column(
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(4.dp),
-                horizontalAlignment = Alignment.End
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 FloatingActionButton(
                     onClick = {
