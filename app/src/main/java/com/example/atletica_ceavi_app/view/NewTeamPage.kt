@@ -1,5 +1,6 @@
 package com.example.atletica_ceavi_app.view
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -16,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -38,6 +40,8 @@ fun NewTeamPage(
         val selectedSport by teamViewModel.selectedSport.collectAsState()
         val selectedCoach by teamViewModel.selectedCoach.collectAsState()
         val selectedAthletes by teamViewModel.selectedAthletes.collectAsState()
+        val isTeamAdded by teamViewModel.isTeamAdded
+        val context = LocalContext.current
 
         Column(
             modifier = Modifier
@@ -97,6 +101,17 @@ fun NewTeamPage(
                 enabled = teamName.isNotBlank() && selectedSport != null && selectedCoach != null
             ) {
                 Text("Criar Equipe")
+            }
+
+            LaunchedEffect(isTeamAdded) {
+                if (isTeamAdded) {
+                    Toast.makeText(context, "Cadastro realizado com sucesso!", Toast.LENGTH_SHORT).show()
+
+                    navController.navigate("teams") {
+                        popUpTo("NewTeamPage") { inclusive = true }
+                    }
+                    teamViewModel.resetTeamAdded()
+                }
             }
         }
     }

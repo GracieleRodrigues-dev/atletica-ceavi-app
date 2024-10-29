@@ -10,6 +10,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
@@ -48,6 +53,9 @@ fun MapComponent(
 
     if (hasLocationPermission) {
         GoogleMap(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(),
             properties = mapProperties,
             uiSettings = mapUiSettings,
             cameraPositionState = cameraPositionState,
