@@ -3,12 +3,12 @@ package com.example.atletica_ceavi_app.ui.components.navigation
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.example.atletica_ceavi_app.ui.components.icons.Alarm_on
+import com.example.atletica_ceavi_app.ui.components.icons.BicepsFlexed
 import com.example.atletica_ceavi_app.ui.components.icons.People
 import com.example.atletica_ceavi_app.ui.components.icons.Sports_baseball
 
@@ -47,5 +47,12 @@ val menuItems = listOf(
             MenuItem("Adicionar Equipe", "newTeam", Icons.Filled.AddCircle)
         )),
 
-    MenuItem("Adicionar Treino", "newTraining", Alarm_on) ,
+    MenuItem("Treinos",
+        "",
+        BicepsFlexed,
+        subItems = listOf(
+            MenuItem("Lista de Treinos", "trainings", Icons.Default.DateRange),
+            MenuItem("Adicionar Treino", "newTraining", BicepsFlexed)
+        )
+    )
 )

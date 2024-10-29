@@ -164,76 +164,109 @@ public val People: ImageVector
 
 private var _People: ImageVector? = null
 
-
-public val Alarm_on: ImageVector
+public val BicepsFlexed: ImageVector
     get() {
-        if (_Alarm_on != null) {
-            return _Alarm_on!!
+        if (_BicepsFlexed != null) {
+            return _BicepsFlexed!!
         }
-        _Alarm_on = ImageVector.Builder(
-            name = "Alarm_on",
+        _BicepsFlexed = ImageVector.Builder(
+            name = "BicepsFlexed",
             defaultWidth = 24.dp,
             defaultHeight = 24.dp,
-            viewportWidth = 960f,
-            viewportHeight = 960f
+            viewportWidth = 24f,
+            viewportHeight = 24f
         ).apply {
             path(
-                fill = SolidColor(Color.Black),
+                fill = null,
                 fillAlpha = 1.0f,
-                stroke = null,
+                stroke = SolidColor(Color(0xFF000000)),
                 strokeAlpha = 1.0f,
-                strokeLineWidth = 1.0f,
-                strokeLineCap = StrokeCap.Butt,
-                strokeLineJoin = StrokeJoin.Miter,
+                strokeLineWidth = 2f,
+                strokeLineCap = StrokeCap.Round,
+                strokeLineJoin = StrokeJoin.Round,
                 strokeLineMiter = 1.0f,
                 pathFillType = PathFillType.NonZero
             ) {
-                moveTo(438f, 662f)
-                lineToRelative(226f, -226f)
-                lineToRelative(-57f, -57f)
-                lineToRelative(-169f, 169f)
-                lineToRelative(-85f, -85f)
-                lineToRelative(-57f, 57f)
-                close()
-                moveToRelative(42f, 218f)
-                quadToRelative(-75f, 0f, -140.5f, -28.5f)
-                reflectiveQuadToRelative(-114f, -77f)
-                reflectiveQuadToRelative(-77f, -114f)
-                reflectiveQuadTo(120f, 520f)
-                reflectiveQuadToRelative(28.5f, -140.5f)
-                reflectiveQuadToRelative(77f, -114f)
-                reflectiveQuadToRelative(114f, -77f)
-                reflectiveQuadTo(480f, 160f)
-                reflectiveQuadToRelative(140.5f, 28.5f)
-                reflectiveQuadToRelative(114f, 77f)
-                reflectiveQuadToRelative(77f, 114f)
-                reflectiveQuadTo(840f, 520f)
-                reflectiveQuadToRelative(-28.5f, 140.5f)
-                reflectiveQuadToRelative(-77f, 114f)
-                reflectiveQuadToRelative(-114f, 77f)
-                reflectiveQuadTo(480f, 880f)
-                moveTo(224f, 94f)
-                lineToRelative(56f, 56f)
-                lineToRelative(-170f, 170f)
-                lineToRelative(-56f, -56f)
-                close()
-                moveToRelative(512f, 0f)
-                lineToRelative(170f, 170f)
-                lineToRelative(-56f, 56f)
-                lineToRelative(-170f, -170f)
-                close()
-                moveTo(480f, 800f)
-                quadToRelative(117f, 0f, 198.5f, -81.5f)
-                reflectiveQuadTo(760f, 520f)
-                reflectiveQuadToRelative(-81.5f, -198.5f)
-                reflectiveQuadTo(480f, 240f)
-                reflectiveQuadToRelative(-198.5f, 81.5f)
-                reflectiveQuadTo(200f, 520f)
-                reflectiveQuadToRelative(81.5f, 198.5f)
-                reflectiveQuadTo(480f, 800f)
+                moveTo(12.409f, 13.017f)
+                arcTo(5f, 5f, 0f, isMoreThanHalf = false, isPositiveArc = true, 22f, 15f)
+                curveToRelative(0f, 3.866f, -4f, 7f, -9f, 7f)
+                curveToRelative(-4.077f, 0f, -8.153f, -0.82f, -10.371f, -2.462f)
+                curveToRelative(-0.426f, -0.316f, -0.631f, -0.832f, -0.62f, -1.362f)
+                curveTo(2.118f, 12.723f, 2.627f, 2f, 10f, 2f)
+                arcToRelative(3f, 3f, 0f, isMoreThanHalf = false, isPositiveArc = true, 3f, 3f)
+                arcToRelative(2f, 2f, 0f, isMoreThanHalf = false, isPositiveArc = true, -2f, 2f)
+                curveToRelative(-1.105f, 0f, -1.64f, -0.444f, -2f, -1f)
+            }
+            path(
+                fill = null,
+                fillAlpha = 1.0f,
+                stroke = SolidColor(Color(0xFF000000)),
+                strokeAlpha = 1.0f,
+                strokeLineWidth = 2f,
+                strokeLineCap = StrokeCap.Round,
+                strokeLineJoin = StrokeJoin.Round,
+                strokeLineMiter = 1.0f,
+                pathFillType = PathFillType.NonZero
+            ) {
+                moveTo(15f, 14f)
+                arcToRelative(5f, 5f, 0f, isMoreThanHalf = false, isPositiveArc = false, -7.584f, 2f)
+            }
+            path(
+                fill = null,
+                fillAlpha = 1.0f,
+                stroke = SolidColor(Color(0xFF000000)),
+                strokeAlpha = 1.0f,
+                strokeLineWidth = 2f,
+                strokeLineCap = StrokeCap.Round,
+                strokeLineJoin = StrokeJoin.Round,
+                strokeLineMiter = 1.0f,
+                pathFillType = PathFillType.NonZero
+            ) {
+                moveTo(9.964f, 6.825f)
+                curveTo(8.019f, 7.977f, 9.5f, 13f, 8f, 15f)
             }
         }.build()
-        return _Alarm_on!!
+        return _BicepsFlexed!!
     }
 
-private var _Alarm_on: ImageVector? = null
+private var _BicepsFlexed: ImageVector? = null
+
+public val Clock: ImageVector
+    get() {
+        if (_Clock != null) {
+            return _Clock!!
+        }
+        _Clock = ImageVector.Builder(
+            name = "Clock",
+            defaultWidth = 24.dp,
+            defaultHeight = 24.dp,
+            viewportWidth = 24f,
+            viewportHeight = 24f
+        ).apply {
+            path(
+                fill = null,
+                fillAlpha = 1.0f,
+                stroke = SolidColor(Color(0xFF0F172A)),
+                strokeAlpha = 1.0f,
+                strokeLineWidth = 1.5f,
+                strokeLineCap = StrokeCap.Round,
+                strokeLineJoin = StrokeJoin.Round,
+                strokeLineMiter = 1.0f,
+                pathFillType = PathFillType.NonZero
+            ) {
+                moveTo(12f, 6f)
+                verticalLineTo(12f)
+                horizontalLineTo(16.5f)
+                moveTo(21f, 12f)
+                curveTo(21f, 16.9706f, 16.9706f, 21f, 12f, 21f)
+                curveTo(7.0294f, 21f, 3f, 16.9706f, 3f, 12f)
+                curveTo(3f, 7.0294f, 7.0294f, 3f, 12f, 3f)
+                curveTo(16.9706f, 3f, 21f, 7.0294f, 21f, 12f)
+                close()
+            }
+        }.build()
+        return _Clock!!
+    }
+
+private var _Clock: ImageVector? = null
+

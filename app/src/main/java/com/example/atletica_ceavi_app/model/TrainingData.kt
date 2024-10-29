@@ -7,12 +7,11 @@ data class Training(
     val locationName: String?,
     val latitude: Double?,
     val longitude: Double?,
-    val sport: Sport?,
     val teams: List<Team>?,
     val notes: String? = null,
     val isRecurring: Boolean? = false,
     val recurringDayOfWeek: Int? = null // Dia da semana (1 = domingo, 2 = segunda, etc.)
 ){
-    constructor(): this(null, null, null, null, null, null, null, null, null, null, null)
+    constructor(): this(null, null,null, null, null, null, null, null, null, null)
 }
 

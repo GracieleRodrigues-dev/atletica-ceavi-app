@@ -15,42 +15,39 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.atletica_ceavi_app.model.Team
+import com.example.atletica_ceavi_app.model.Training
 import com.example.atletica_ceavi_app.ui.components.navigation.DrawerLayout
 import com.example.atletica_ceavi_app.viewModel.AuthViewModel
-import com.example.atletica_ceavi_app.viewModel.TeamViewModel
+import com.example.atletica_ceavi_app.viewModel.TrainingViewModel
 
 @Composable
-fun TeamListPage(
+fun TrainingListPage(
     navController: NavController,
     authViewModel: AuthViewModel
 ) {
-    val teamViewModel: TeamViewModel = viewModel()
-    teamViewModel.refreshTeams()
+    val trainingViewModel: TrainingViewModel = viewModel()
+    val trainings by trainingViewModel.training.collectAsState(initial = emptyList())
     val scrollState = rememberScrollState()
 
     DrawerLayout(navController, authViewModel) {
-        val teams by teamViewModel.teams.collectAsState()
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(16.dp)
                 .verticalScroll(scrollState)
         ) {
             Spacer(modifier = Modifier.height(16.dp))
 
-            if (teams.isEmpty()) {
-                Text("Nenhuma equipe encontrada.", modifier = Modifier.padding(16.dp))
+            if (trainings.isEmpty()) {
+                Text("Nenhum treino encontrado.", modifier = Modifier.padding(16.dp))
             } else {
                 LazyColumn(
                     modifier = Modifier
                         .weight(1f)
                         .padding(8.dp)
                 ) {
-                    items(teams) { team ->
-                        TeamItem(
-                            team = team
-                        )
+                    items(trainings) { training ->
+                        TrainingItem(training = training)
                     }
                 }
             }
@@ -63,20 +60,20 @@ fun TeamListPage(
             ) {
                 FloatingActionButton(
                     onClick = {
-                        teamViewModel.refreshTeams()
+                        trainingViewModel.refreshTrainings()
                     },
                     containerColor = MaterialTheme.colorScheme.primary
                 ) {
-                    Icon(imageVector = Icons.Filled.Refresh, contentDescription = "Atualizar Equipes")
+                    Icon(imageVector = Icons.Filled.Refresh, contentDescription = "Atualizar Treinos")
                 }
 
                 FloatingActionButton(
                     onClick = {
-                        navController.navigate("newTeam")
+                        navController.navigate("newTraining")
                     },
                     containerColor = MaterialTheme.colorScheme.primary
                 ) {
-                    Icon(imageVector = Icons.Filled.Add, contentDescription = "Nova Equipe")
+                    Icon(imageVector = Icons.Filled.Add, contentDescription = "Novo Treino")
                 }
             }
         }
@@ -84,9 +81,7 @@ fun TeamListPage(
 }
 
 @Composable
-fun TeamItem(
-    team: Team,
-) {
+fun TrainingItem(training: Training) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -100,8 +95,20 @@ fun TeamItem(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column(modifier = Modifier.weight(1f)) {
-                Text(text = "Nome: ${team.name}")
-                Text(text = "Modalidade: ${team.sport}")
+                Text(text = "Data: ${training.date}")
+                Text(text = "Hora: ${training.time}")
+                Text(text = "Local: ${training.locationName}")
+
+                training.notes?.let { Text(text = "Notas: $it") }
+
+                training.teams?.let { teams ->
+                    if (teams.isNotEmpty()) {
+                        Text(text = "Equipes:", style = MaterialTheme.typography.bodyLarge)
+                        teams.forEach { team ->
+                            Text(text = team.toString())
+                        }
+                    }
+                }
             }
         }
     }
