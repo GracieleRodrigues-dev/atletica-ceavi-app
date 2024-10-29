@@ -24,7 +24,7 @@ fun AtleticaceaviappTheme(
     val colors = DarkColorPalette
     MaterialTheme(
         colorScheme = colors,
-        typography = Typography, // Certifique-se de que `Typography` esteja configurado em `type.kt`
+        typography = Typography, 
         content = content
     )
 }

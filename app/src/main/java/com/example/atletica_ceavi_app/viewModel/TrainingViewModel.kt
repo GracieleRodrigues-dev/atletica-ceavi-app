@@ -50,14 +50,12 @@ class TrainingViewModel(
     private val _trainings = MutableStateFlow<List<Training>>(emptyList())
     val training: StateFlow<List<Training>> = _trainings
 
-    private val sportRepository = SportRepository()
     private val teamRepository = TeamRepository()
 
     fun updateDate(newDate: String) { _date.value = newDate }
     fun updateTime(newTime: String) { _time.value = newTime }
     fun updateLocationName(newLocationName: String) { _locationName.value = newLocationName }
     fun updateSelectedLocation(latitude: Double, longitude: Double) { _selectedLocation.value = Pair(latitude, longitude) }
-    fun updateTeams(newTeams: List<Team>) { _teams.value = newTeams }
     fun updateNotes(newNotes: String) { _notes.value = newNotes }
     fun setIsRecurring(isRecurring: Boolean) { _isRecurring.value = isRecurring }
     fun updateRecurringDayOfWeek(dayOfWeek: Int?) { _recurringDayOfWeek.value = dayOfWeek }
