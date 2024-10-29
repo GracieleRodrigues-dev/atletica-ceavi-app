@@ -3,6 +3,8 @@ package com.example.atletica_ceavi_app.view
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DropdownMenu
@@ -27,6 +29,7 @@ fun NewTeamPage(
     authViewModel: AuthViewModel
 ) {
     val teamViewModel: TeamViewModel = viewModel()
+    val scrollState = rememberScrollState()
 
     DrawerLayout(navController, authViewModel) {
         var teamName by remember { mutableStateOf("") }
@@ -36,7 +39,12 @@ fun NewTeamPage(
         val selectedCoach by teamViewModel.selectedCoach.collectAsState()
         val selectedAthletes by teamViewModel.selectedAthletes.collectAsState()
 
-        Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+                .verticalScroll(scrollState),
+        ){
             Text(text = "Criar Equipe", style = MaterialTheme.typography.titleMedium)
 
             Spacer(modifier = Modifier.height(16.dp))
